@@ -1,0 +1,101 @@
+<div class="container-fluid px-4 py-6">
+  <!-- Modal Header -->
+  <div class="modal-header bg-dark text-white p-4">
+    <h5 class="modal-title">Edit Policy</h5>
+  </div>
+
+  <!-- Modal Body -->
+  <div class="modal-body bg-dark text-white">
+    <form [formGroup]="editPolicyForm" (ngSubmit)="saveChanges()" class="row g-3">
+      <!-- First Column -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="policyNumber" class="form-label">Policy Number</label>
+          <input
+            type="text"
+            class="form-control"
+            id="policyNumber"
+            formControlName="policyNumber"
+            placeholder="Enter policy number"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="policyHolderName" class="form-label"
+            >Policy Holder Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="policyHolderName"
+            formControlName="policyHolderName"
+            placeholder="Enter policy holder name"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="policyType" class="form-label">Policy Type</label>
+          <input
+            type="text"
+            class="form-control"
+            id="policyType"
+            formControlName="policyType"
+            placeholder="Enter policy type"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="premiumAmount" class="form-label">Premium Amount</label>
+          <input
+            type="number"
+            class="form-control"
+            id="premiumAmount"
+            formControlName="premiumAmount"
+            placeholder="Enter premium amount"
+          />
+        </div>
+      </div>
+
+      <!-- Second Column -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="startDate"
+            formControlName="startDate"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="endDate" class="form-label">End Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="endDate"
+            formControlName="endDate"
+          />
+        </div>
+
+        <div class="mb-3 form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="isActive"
+            formControlName="isActive"
+          />
+          <label class="form-check-label" for="isActive">Active</label>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="col-12 text-end">
+        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

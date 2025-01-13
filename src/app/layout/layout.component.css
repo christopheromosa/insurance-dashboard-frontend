@@ -1,0 +1,31 @@
+
+/* Main Section Styling */
+.bg-theme {
+  background-color: #0a0a23;
+  color: white;
+}
+
+main {
+  overflow-y: auto;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar .nav-link.active {
+  font-weight: bold;
+  /* border-bottom: 5px solid white; */
+  background-color: #0a0a23;
+  border-radius: 5px;
+  width: 10rem;
+  display: flex;
+  justify-content: center;
+
+  /* Highlight active link */
+}
+
+.navbar .nav-link:hover {
+  text-decoration: none;
+}

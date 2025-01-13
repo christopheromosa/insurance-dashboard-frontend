@@ -1,1 +1,74 @@
-<p>dashboard works!</p>
+<div class="container-fluid py-4 px-5">
+  <h2 class="text-white mb-4 border-bottom pb-2">Dashboard</h2>
+
+  <div class="row mb-4">
+    <!-- Card for Total Policies -->
+    <div class="col-lg-4 mb-4">
+      <div class="card text-white bg-primary border-light shadow-sm">
+        <div class="card-body text-center">
+          <i class="fas fa-file-alt fa-3x mb-3"></i>
+          <h5 class="card-title">Total Policies</h5>
+          <p class="card-text fs-4">{{ totalPolicies }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card for Active Policies -->
+    <div class="col-lg-4 mb-4">
+      <div class="card text-white bg-success border-light shadow-sm">
+        <div class="card-body text-center">
+          <i class="fas fa-check-circle fa-3x mb-3"></i>
+          <h5 class="card-title">Active Policies</h5>
+          <p class="card-text fs-4">{{ activePolicies }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card for Expired Policies -->
+    <div class="col-lg-4 mb-4">
+      <div class="card text-white bg-danger border-light shadow-sm">
+        <div class="card-body text-center">
+          <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+          <h5 class="card-title">Expired Policies</h5>
+          <p class="card-text fs-4">{{ expiredPolicies }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Policies Table -->
+  <div class="table-responsive bg-dark border rounded p-3">
+    <h3 class="text-white mb-3 border-bottom pb-2">Recent Policies</h3>
+    <table class="table table-bordered table-striped table-dark align-middle">
+      <thead class="table-light text-dark text-center">
+        <tr>
+          <th>Policy Number</th>
+          <th>Policy Holder Name</th>
+          <th>Policy Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Premium Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let policy of recentPolicies" class="text-center">
+          <td>{{ policy.policyNumber }}</td>
+          <td>{{ policy.policyHolderName }}</td>
+          <td>{{ policy.policyType }}</td>
+          <td>{{ policy.startDate | date }}</td>
+          <td>{{ policy.endDate | date }}</td>
+          <td>{{ policy.premiumAmount | currency }}</td>
+          <td>
+            <span 
+              class="badge" 
+              [ngClass]="policy.isActive ? 'bg-success' : 'bg-danger'"
+            >
+              {{ policy.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

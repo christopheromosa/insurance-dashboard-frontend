@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { dashboardRoutes } from './dashboard-routing';
+import { appRoutes } from './app.routes';
+
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule.forChild(dashboardRoutes)],
+  imports: [RouterModule.forRoot(appRoutes), CommonModule],
+  exports: [RouterModule],
 })
-export class DashboardModule {}
+export class AppRoutingModule {}

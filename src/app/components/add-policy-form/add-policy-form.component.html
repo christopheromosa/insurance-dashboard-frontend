@@ -1,1 +1,165 @@
-<p>add-policy-form works!</p>
+<div class="d-flex align-items-center justify-content-center min-vh-100 bg-theme text-white border">
+  <div class="col-md-8 bg-dark text-white rounded p-5 shadow-lg border" style="overflow-y: auto;">
+    <h2 class="text-center mb-4">Add New Insurance Policy</h2>
+    <form [formGroup]="policyForm" (ngSubmit)="onSubmit()" class="px-4 py-5 border">
+      <div class="row g-4">
+        <!-- Policy Number -->
+        <div class="col-md-6">
+          <label for="policyNumber" class="form-label">Policy Number</label>
+          <input
+            id="policyNumber"
+            type="text"
+            class="form-control"
+            formControlName="policyNumber"
+            placeholder="Enter policy number"
+            style="color: #fff; background-color: #343a40;"
+          />
+          <div
+            *ngIf="
+              policyForm.get('policyNumber')?.invalid &&
+              policyForm.get('policyNumber')?.touched
+            "
+            class="text-danger"
+          >
+            Policy Number is required (max 100 characters).
+          </div>
+        </div>
+
+        <!-- Policy Holder Name -->
+        <div class="col-md-6">
+          <label for="policyHolderName" class="form-label">Policy Holder Name</label>
+          <input
+            id="policyHolderName"
+            type="text"
+            class="form-control"
+            formControlName="policyHolderName"
+            placeholder="Enter policy holder name"
+            style="color: #fff; background-color: #343a40;"
+          />
+          <div
+            *ngIf="
+              policyForm.get('policyHolderName')?.invalid &&
+              policyForm.get('policyHolderName')?.touched
+            "
+            class="text-danger"
+          >
+            Policy Holder Name is required (max 200 characters).
+          </div>
+        </div>
+
+        <!-- Premium Amount -->
+        <div class="col-md-6">
+          <label for="premiumAmount" class="form-label">Premium Amount</label>
+          <input
+            id="premiumAmount"
+            type="number"
+            class="form-control"
+            formControlName="premiumAmount"
+            placeholder="Enter premium amount"
+            style="color: #fff; background-color: #343a40;"
+          />
+          <div
+            *ngIf="
+              policyForm.get('premiumAmount')?.invalid &&
+              policyForm.get('premiumAmount')?.touched
+            "
+            class="text-danger"
+          >
+            Premium Amount is required and must be a positive number.
+          </div>
+        </div>
+
+        <!-- Policy Type (Dropdown) -->
+        <div class="col-md-6">
+          <label for="policyType" class="form-label">Policy Type</label>
+          <select
+            id="policyType"
+            class="form-select"
+            formControlName="policyType"
+            style="color: #fff; background-color: #343a40;"
+          >
+            <option value="" disabled>Select policy type</option>
+            <option value="Life">Life</option>
+            <option value="Health">Health</option>
+            <option value="Vehicle">Vehicle</option>
+          </select>
+          <div
+            *ngIf="
+              policyForm.get('policyType')?.invalid &&
+              policyForm.get('policyType')?.touched
+            "
+            class="text-danger"
+          >
+            Policy Type is required.
+          </div>
+        </div>
+
+        <!-- Start Date -->
+        <div class="col-md-6">
+          <label for="startDate" class="form-label">Start Date</label>
+          <input
+            id="startDate"
+            type="date"
+            class="form-control"
+            formControlName="startDate"
+            style="color: #fff; background-color: #343a40;"
+          />
+          <div
+            *ngIf="
+              policyForm.get('startDate')?.invalid &&
+              policyForm.get('startDate')?.touched
+            "
+            class="text-danger"
+          >
+            Start Date is required.
+          </div>
+        </div>
+
+        <!-- End Date -->
+        <div class="col-md-6">
+          <label for="endDate" class="form-label">End Date</label>
+          <input
+            id="endDate"
+            type="date"
+            class="form-control"
+            formControlName="endDate"
+            style="color: #fff; background-color: #343a40;"
+          />
+          <div
+            *ngIf="
+              policyForm.get('endDate')?.invalid &&
+              policyForm.get('endDate')?.touched
+            "
+            class="text-danger"
+          >
+            End Date is required.
+          </div>
+        </div>
+
+        <!-- Is Active -->
+        <div class="col-md-12">
+          <div class="form-check">
+            <input
+              id="isActive"
+              type="checkbox"
+              class="form-check-input"
+              formControlName="isActive"
+            />
+            <label for="isActive" class="form-check-label">Is Active</label>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-md-12">
+          <button
+            type="submit"
+            class="btn btn-theme w-100"
+            [disabled]="policyForm.invalid"
+          >
+            Add Policy
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

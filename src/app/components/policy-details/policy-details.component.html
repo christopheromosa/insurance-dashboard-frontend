@@ -1,1 +1,66 @@
-<p>policy-details works!</p>
+<div class="container-fluid py-4 px-5 border bg-dark text-white p-4 rounded">
+  <h2 class="text-white mb-4 border-bottom pb-2">Policy Details</h2>
+
+  <!-- Search Input -->
+  <div class="mb-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by policy number or policy holder name..."
+      [(ngModel)]="searchQuery"
+      style="color: #fff; background-color: #343a40;"
+    />
+  </div>
+
+  <!-- Policy Table -->
+  <div class="table-responsive bg-dark border rounded p-3">
+    <h3 class="text-white mb-3 border-bottom pb-2">Policy Details</h3>
+    <table class="table table-bordered table-striped table-dark align-middle">
+      <thead class="table-light text-dark text-center">
+        <tr>
+          <th>Policy Number</th>
+          <th>Policy Holder Name</th>
+          <th>Policy Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Premium Amount</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="
+            let policy of policies | filterPolicy: searchQuery;
+            let i = index
+          "
+          class="text-center"
+        >
+          <td>{{ policy.policyNumber }}</td>
+          <td>{{ policy.policyHolderName }}</td>
+          <td>{{ policy.policyType }}</td>
+          <td>{{ policy.startDate | date }}</td>
+          <td>{{ policy.endDate | date }}</td>
+          <td>{{ policy.premiumAmount | currency }}</td>
+          <td>
+            <span 
+              class="badge" 
+              [ngClass]="policy.isActive ? 'bg-success' : 'bg-danger'"
+            >
+              {{ policy.isActive ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-warning btn-sm m-1" (click)="editPolicy(policy)">Edit</button>
+            <button class="btn btn-danger btn-sm m-1" (click)="deletePolicy(policy)">Delete</button>
+          </td>
+        </tr>
+        <tr *ngIf="(policies | filterPolicy: searchQuery).length === 0">
+          <td colspan="8" class="text-center text-warning">
+            No matching policies found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
