@@ -1,8 +1,15 @@
-<div class="d-flex align-items-center justify-content-center min-vh-100 bg-theme text-white border">
-  <div class="col-md-8 bg-dark text-white rounded p-5 shadow-lg border" style="overflow-y: auto;">
+<div
+  class="d-flex align-items-center justify-content-center bg-theme text-white p-4"
+>
+  <div class="col-md-8 bg-dark text-white rounded p-4 shadow-lg   justify-content-center my-6">
     <h2 class="text-center mb-4">Add New Insurance Policy</h2>
-    <form [formGroup]="policyForm" (ngSubmit)="onSubmit()" class="px-4 py-5 border">
-      <div class="row g-4">
+    <form
+      [formGroup]="policyForm"
+      (ngSubmit)="onSubmit()"
+      class="border p-4"
+      style="box-sizing: border-box"
+    >
+      <div class="row g-3">
         <!-- Policy Number -->
         <div class="col-md-6">
           <label for="policyNumber" class="form-label">Policy Number</label>
@@ -12,7 +19,7 @@
             class="form-control"
             formControlName="policyNumber"
             placeholder="Enter policy number"
-            style="color: #fff; background-color: #343a40;"
+            style="color: #fff; background-color: #343a40"
           />
           <div
             *ngIf="
@@ -27,14 +34,16 @@
 
         <!-- Policy Holder Name -->
         <div class="col-md-6">
-          <label for="policyHolderName" class="form-label">Policy Holder Name</label>
+          <label for="policyHolderName" class="form-label"
+            >Policy Holder Name</label
+          >
           <input
             id="policyHolderName"
             type="text"
             class="form-control"
             formControlName="policyHolderName"
             placeholder="Enter policy holder name"
-            style="color: #fff; background-color: #343a40;"
+            style="color: #fff; background-color: #343a40"
           />
           <div
             *ngIf="
@@ -56,7 +65,7 @@
             class="form-control"
             formControlName="premiumAmount"
             placeholder="Enter premium amount"
-            style="color: #fff; background-color: #343a40;"
+            style="color: #fff; background-color: #343a40"
           />
           <div
             *ngIf="
@@ -69,14 +78,14 @@
           </div>
         </div>
 
-        <!-- Policy Type (Dropdown) -->
+        <!-- Policy Type -->
         <div class="col-md-6">
           <label for="policyType" class="form-label">Policy Type</label>
           <select
             id="policyType"
             class="form-select"
             formControlName="policyType"
-            style="color: #fff; background-color: #343a40;"
+            style="color: #fff; background-color: #343a40"
           >
             <option value="" disabled>Select policy type</option>
             <option value="Life">Life</option>
@@ -102,7 +111,7 @@
             type="date"
             class="form-control"
             formControlName="startDate"
-            style="color: #fff; background-color: #343a40;"
+            style="color: #fff; background-color: #343a40"
           />
           <div
             *ngIf="
@@ -123,7 +132,7 @@
             type="date"
             class="form-control"
             formControlName="endDate"
-            style="color: #fff; background-color: #343a40;"
+            style="color: #fff; background-color: #343a40"
           />
           <div
             *ngIf="

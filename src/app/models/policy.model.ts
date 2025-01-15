@@ -1,5 +1,5 @@
 export interface InsurancePolicy {
-//   id: number; // Primary Key
+  id: string; // Primary Key
   policyNumber: string; // Unique Identifier for the policy
   policyHolderName: string; // Name of the policyholder
   policyType: string; // E.g., Health, Vehicle, Life, etc.

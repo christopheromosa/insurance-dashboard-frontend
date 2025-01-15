@@ -6,6 +6,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { PolicyService } from '../../services/policy.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-policy-form',
@@ -16,7 +18,7 @@ import {
 export class AddPolicyFormComponent {
   policyForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private policyService:PolicyService,private fb: FormBuilder,private router:Router) {
     this.policyForm = this.fb.group({
       policyNumber: ['', [Validators.required, Validators.maxLength(100)]],
       policyHolderName: ['', [Validators.required, Validators.maxLength(200)]],
@@ -31,7 +33,12 @@ export class AddPolicyFormComponent {
   onSubmit(): void {
     if (this.policyForm.valid) {
       console.log('Policy Data:', this.policyForm.value);
+      this.policyService.addPolicy(this.policyForm.value).subscribe({
+        next: (response) => console.log('Response:', response),
+        error: (error) => console.error('Error:', error),
+      });
       alert('Policy added successfully!');
+      this.router.navigate(['/policy-details']);
       this.policyForm.reset();
     } else {
       alert('Please fill out all fields correctly.');

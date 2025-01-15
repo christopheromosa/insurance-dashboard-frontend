@@ -15,7 +15,18 @@ export class PolicyService {
   }
 
   addPolicy(policy: InsurancePolicy): Observable<InsurancePolicy> {
-    return this.http.post<InsurancePolicy>(this.apiUrl, policy);
+    // const formattedPolicy = {
+    //   ...policy,
+    //   startDate: new Date(policy.startDate).toISOString(),
+    //   endDate: new Date(policy.endDate).toISOString(),
+    // };
+    // console.log('Policy Data:', formattedPolicy);
+
+    return this.http.post<InsurancePolicy>(this.apiUrl, policy, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
   getPolicyById(policyId: string): Observable<InsurancePolicy> {
@@ -23,10 +34,22 @@ export class PolicyService {
     return this.http.get<InsurancePolicy>(`${this.apiUrl}/${policyId}`);
   }
 
-  updatePolicy(policy: InsurancePolicy): Observable<InsurancePolicy> {
+  updatePolicy(
+    policyId: string,
+    policy: InsurancePolicy
+  ): Observable<InsurancePolicy> {
+    
+    const formattedPolicy = {
+      ...policy,
+      id:policyId,
+      startDate: policy.startDate + 'T00:00:00',
+      endDate: policy.endDate + 'T00:00:00',
+    };
+    
+console.log(formattedPolicy);
     return this.http.put<InsurancePolicy>(
-      `${this.apiUrl}/${policy.policyNumber}`,
-      policy
+      `${this.apiUrl}/${policyId}`,
+      formattedPolicy
     );
   }
 

@@ -8,7 +8,7 @@
       class="form-control"
       placeholder="Search by policy number or policy holder name..."
       [(ngModel)]="searchQuery"
-      style="color: #fff; background-color: #343a40;"
+      style="color: #fff; background-color: #0a0a23;"
     />
   </div>
 
@@ -31,7 +31,7 @@
       <tbody>
         <tr
           *ngFor="
-            let policy of policies | filterPolicy: searchQuery;
+            let policy of policies | filterPolicy : searchQuery;
             let i = index
           "
           class="text-center"
@@ -43,19 +43,29 @@
           <td>{{ policy.endDate | date }}</td>
           <td>{{ policy.premiumAmount | currency }}</td>
           <td>
-            <span 
-              class="badge" 
+            <span
+              class="badge"
               [ngClass]="policy.isActive ? 'bg-success' : 'bg-danger'"
             >
-              {{ policy.isActive ? 'Active' : 'Inactive' }}
+              {{ policy.isActive ? "Active" : "Inactive" }}
             </span>
           </td>
           <td>
-            <button class="btn btn-warning btn-sm m-1" (click)="editPolicy(policy)">Edit</button>
-            <button class="btn btn-danger btn-sm m-1" (click)="deletePolicy(policy)">Delete</button>
+            <button
+              class="btn btn-warning btn-sm m-1" 
+              (click)="editPolicy(policy)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-danger btn-sm m-1"
+              (click)="deletePolicy(policy)"
+            >
+              Delete
+            </button>
           </td>
         </tr>
-        <tr *ngIf="(policies | filterPolicy: searchQuery).length === 0">
+        <tr *ngIf="(policies | filterPolicy : searchQuery).length === 0">
           <td colspan="8" class="text-center text-warning">
             No matching policies found.
           </td>
@@ -64,3 +74,16 @@
     </table>
   </div>
 </div>
+  <app-edit-policy-dialog
+    *ngIf="isEditDialogOpen && selectedPolicy"
+    [policy]="selectedPolicy"
+    [isEditDialogOpen]="isEditDialogOpen"
+    (closeEditDialog)="closeEditDialog({ success: false })"
+  ></app-edit-policy-dialog>
+
+  <app-delete-policy-dialog
+    *ngIf="isDeleteModalOpen && selectedPolicy"
+    [policy]="selectedPolicy"
+    [isDeleteModalOpen]="isDeleteModalOpen"
+    (closeDeleteDialog)="closeDeleteDialog({ success: false })"
+  ></app-delete-policy-dialog>

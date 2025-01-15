@@ -1,55 +1,70 @@
-<div class="vh-100 d-flex flex-column">
-  <!-- Top Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
-    <div class="container-fluid">
-      <a class="navbar-brand fs-4 text-light" href="#">InsuranceApp</a>
-      <button 
-        class="navbar-toggler" 
-        type="button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbarNav" 
-        aria-controls="navbarNav" 
-        aria-expanded="false" 
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-evenly">
-          <li class="nav-item">
-            <a 
-              class="nav-link text-light fs-5" 
-              [routerLink]="['/dashboard']" 
-              routerLinkActive="active"
-            >
-              Dashboard
-            </a>
-          </li>
-          <li class="nav-item">
-            <a 
-              class="nav-link text-light fs-5" 
-              [routerLink]="['/policies']" 
-              routerLinkActive="active"
-            >
-              Policies
-            </a>
-          </li>
-          <li class="nav-item">
-            <a 
-              class="nav-link text-light fs-5" 
-              [routerLink]="['/add-policy']" 
-              routerLinkActive="active"
-            >
-              Add Policy
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
+<div class="vh-100 d-flex flex-row">
+  <!-- Sidebar -->
+  <nav class="sidebar bg-dark text-light d-flex flex-column p-3">
+    <a class="navbar-brand fs-4 text-light mb-4" href="#">InsuranceApp</a>
+    <ul class="nav flex-column">
+      <li class="nav-item mb-3">
+        <a 
+          class="nav-link text-light fs-5" 
+          [routerLink]="['/dashboard']" 
+          routerLinkActive="active"
+        >
+          Dashboard
+        </a>
+      </li>
+      <li class="nav-item mb-3">
+        <a 
+          class="nav-link text-light fs-5" 
+          [routerLink]="['/policies']" 
+          routerLinkActive="active"
+        >
+          Policies
+        </a>
+      </li>
+      <li class="nav-item">
+        <a 
+          class="nav-link text-light fs-5" 
+          [routerLink]="['/add-policy']" 
+          routerLinkActive="active"
+        >
+          Add Policy
+        </a>
+      </li>
+    </ul>
   </nav>
 
   <!-- Main Section -->
-  <main class="flex-grow-1 p-4 bg-theme border">
-    <router-outlet></router-outlet>
-  </main>
+  <div class="d-flex flex-column flex-grow-1">
+    <!-- Top Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
+      <div class="container-fluid">
+        <button 
+          class="navbar-toggler" 
+          type="button" 
+          data-bs-toggle="collapse" 
+          data-bs-target="#navbarNav" 
+          aria-controls="navbarNav" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav w-100 justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link text-light fs-5" href="#">Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light fs-5" href="#">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 p-4 bg-theme ">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

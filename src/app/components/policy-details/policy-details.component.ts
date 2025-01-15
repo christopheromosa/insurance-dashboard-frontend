@@ -8,18 +8,34 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditPolicyDialogComponent } from '../edit-policy-dialog/edit-policy-dialog.component';
 import { DeletePolicyDialogComponent } from '../delete-policy-dialog/delete-policy-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-policy-details',
-  imports: [CommonModule, FilterPolicyPipe, FormsModule, MatDialogModule],
+  imports: [
+    CommonModule,
+    FilterPolicyPipe,
+    FormsModule,
+    MatDialogModule,
+    EditPolicyDialogComponent,
+    DeletePolicyDialogComponent,
+  ],
   templateUrl: './policy-details.component.html',
   styleUrls: ['./policy-details.component.css'],
 })
 export class PolicyDetailsComponent implements OnInit {
   policies: InsurancePolicy[] = [];
   searchQuery: string = '';
+  isEditDialogOpen = false;
+  isDeleteModalOpen = false;
 
-  constructor(private policyService: PolicyService, public dialog: MatDialog) {}
+  selectedPolicy: InsurancePolicy | null = null;
+
+  constructor(
+    private policyService: PolicyService,
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadPolicies();
@@ -29,54 +45,30 @@ export class PolicyDetailsComponent implements OnInit {
     this.policyService.getPolicies().subscribe((policies) => {
       this.policies = policies;
     });
+    console.log(this.policies);
+    
   }
 
   editPolicy(policy: InsurancePolicy): void {
-    const dialogRef = this.dialog.open(EditPolicyDialogComponent, {
-      width: '500px',
-      data: { policy },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.policyService.updatePolicy(result).subscribe(
-          (updatedPolicy) => {
-            // Update successful
-            const index = this.policies.findIndex(
-              (p) => p.policyNumber === updatedPolicy.policyNumber
-            );
-            this.policies[index] = updatedPolicy;
-            console.log('Policy updated successfully.');
-          },
-          (error) => {
-            console.error('Error updating policy:', error);
-          }
-        );
-      }
-    });
+    this.selectedPolicy = policy;
+    this.isEditDialogOpen = true;
+  }
+  deletePolicy(policy: InsurancePolicy): void {
+    this.selectedPolicy = policy;
+    this.isDeleteModalOpen = true;
   }
 
-  deletePolicy(policy: InsurancePolicy): void {
-    const dialogRef = this.dialog.open(DeletePolicyDialogComponent, {
-      width: '500px',
-      data: { policy },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.policyService.deletePolicy(policy.policyNumber).subscribe(
-          () => {
-            // Removal successful
-            this.policies = this.policies.filter(
-              (p) => p.policyNumber !== policy.policyNumber
-            );
-            console.log('Policy deleted successfully.');
-          },
-          (error) => {
-            console.error('Error deleting policy:', error);
-          }
-        );
-      }
-    });
+  closeEditDialog(event: { success: boolean }): void {
+    this.isEditDialogOpen = false;
+    if (event.success) {
+      this.loadPolicies();
+    }
+  }
+  closeDeleteDialog(event: { success: boolean }): void {
+    this.isDeleteModalOpen = false;
+    if (event.success) {
+      this.loadPolicies();
+    }
   }
 }
+  

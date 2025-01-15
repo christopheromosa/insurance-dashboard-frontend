@@ -1,101 +1,122 @@
-<div class="container-fluid px-4 py-6">
-  <!-- Modal Header -->
-  <div class="modal-header bg-dark text-white p-4">
-    <h5 class="modal-title">Edit Policy</h5>
-  </div>
-
-  <!-- Modal Body -->
-  <div class="modal-body bg-dark text-white">
-    <form [formGroup]="editPolicyForm" (ngSubmit)="saveChanges()" class="row g-3">
-      <!-- First Column -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label for="policyNumber" class="form-label">Policy Number</label>
-          <input
-            type="text"
-            class="form-control"
-            id="policyNumber"
-            formControlName="policyNumber"
-            placeholder="Enter policy number"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="policyHolderName" class="form-label"
-            >Policy Holder Name</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="policyHolderName"
-            formControlName="policyHolderName"
-            placeholder="Enter policy holder name"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="policyType" class="form-label">Policy Type</label>
-          <input
-            type="text"
-            class="form-control"
-            id="policyType"
-            formControlName="policyType"
-            placeholder="Enter policy type"
-          />
-        </div>
-
-        <div class="mb-3">
-          <label for="premiumAmount" class="form-label">Premium Amount</label>
-          <input
-            type="number"
-            class="form-control"
-            id="premiumAmount"
-            formControlName="premiumAmount"
-            placeholder="Enter premium amount"
-          />
-        </div>
+<div class="custom-modal-overlay" *ngIf="isEditDialogOpen">
+  <div class="custom-modal-dialog">
+    <div class="custom-modal-content">
+      <div class="custom-modal-header">
+        <h5 class="custom-modal-title">Edit Policy</h5>
+        <button
+          type="button"
+          class="custom-close-btn"
+          aria-label="Close"
+          (click)="onCancel()"
+        >
+          &times;
+        </button>
       </div>
+      <div class="custom-modal-body">
+        <form [formGroup]="policyForm">
+          <!-- Policy Number -->
+          <div class="mb-3">
+            <label for="policyNumber" class="form-label">Policy Number</label>
+            <input
+              type="text"
+              class="form-control"
+              id="policyNumber"
+              [(ngModel)]="policy.policyNumber"
+              formControlName="policyNumber"
+              readonly
+            />
+          </div>
 
-      <!-- Second Column -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label for="startDate" class="form-label">Start Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="startDate"
-            formControlName="startDate"
-          />
-        </div>
+          <!-- Policy Holder Name -->
+          <div class="mb-3">
+            <label for="policyHolderName" class="form-label">
+              Policy Holder Name
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="policyHolderName"
+              [(ngModel)]="policy.policyHolderName"
+              formControlName="policyHolderName"
+            />
+          </div>
 
-        <div class="mb-3">
-          <label for="endDate" class="form-label">End Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="endDate"
-            formControlName="endDate"
-          />
-        </div>
+          <!-- Policy Type -->
+          <div class="mb-3">
+            <label for="policyType" class="form-label">Policy Type</label>
+            <select
+              id="policyType"
+              class="form-select"
+              formControlName="policyType"
+            >
+              <option value="" disabled>Select policy type</option>
+              <option value="Life">Life</option>
+              <option value="Health">Health</option>
+              <option value="Vehicle">Vehicle</option>
+            </select>
+          </div>
 
-        <div class="mb-3 form-check">
-          <input
-            type="checkbox"
-            class="form-check-input"
-            id="isActive"
-            formControlName="isActive"
-          />
-          <label class="form-check-label" for="isActive">Active</label>
-        </div>
+          <!-- Start Date -->
+          <div class="mb-3">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              formControlName="startDate"
+            />
+          </div>
+
+          <!-- End Date -->
+          <div class="mb-3">
+            <label for="endDate" class="form-label">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              formControlName="endDate"
+            />
+          </div>
+
+          <!-- Premium Amount -->
+          <div class="mb-3">
+            <label for="premiumAmount" class="form-label">Premium Amount</label>
+            <input
+              type="number"
+              class="form-control"
+              id="premiumAmount"
+              [(ngModel)]="policy.premiumAmount"
+              min="0"
+              formControlName="premiumAmount"
+            />
+          </div>
+
+          <!-- Is Active Checkbox -->
+          <div class="form-check">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="isActive"
+              [(ngModel)]="policy.isActive"
+              formControlName="isActive"
+            />
+            <label for="isActive" class="form-check-label">Is Active</label>
+          </div>
+        </form>
       </div>
-
-      <!-- Modal Footer -->
-      <div class="col-12 text-end">
-        <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+      <div class="custom-modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">
           Cancel
         </button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="policyForm.invalid"
+          (click)="onSave()"
+        >
+          Save
+        </button>
       </div>
-    </form>
+    </div>
   </div>
 </div>
