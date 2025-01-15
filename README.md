@@ -20,8 +20,8 @@ npm install -g @angular/cli
 ## Steps to Set Up and Run the Frontend
 ### Clone the frontend repository:
 ```bash
-git clone <frontend-repo-url>
-cd <frontend-repo-folder>
+git clone https://github.com/christopheromosa/insurance-dashboard-frontend.git
+cd insurance-dashboard-frontend
 ```
 ### Install dependencies:
 ```bash
